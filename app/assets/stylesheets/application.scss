@@ -19,6 +19,15 @@
 	border-radius: 5px; 
 }
 
+.bgcolor{
+    left: -10;
+    bottom: 0;
+    width: 100%;
+    background-color: #073b15;
+    color: white;
+    text-align: center;
+}
+
 .jumbotron{
 	background-image: asset-url('cover_image.jpg');
 	background-size: cover;

@@ -5,4 +5,5 @@ class Chef < ApplicationRecord
 									  format: {with: VALID_EMAIL_REGEX }
 
 	has_many :recipes
+	has_secure_password
 end

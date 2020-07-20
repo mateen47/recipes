@@ -7,10 +7,13 @@
 	<div class="col-md-8 well">
 		<br>
 	</div>
-	<div class="col-md-8 well" style=" padding-left: 400px;">
+	<div class="col-md-8 well" style=" padding-left: 320px;">
 		<div class="recipe-actions ">
-			<% if logged_in? && current_chef==@chef %>
+			<% if logged_in? && (current_chef==@chef || current_chef.admin?) %>
 				<%= link_to "Edit Profile", edit_chef_path(@chef), class: "btn btn-xs btn-warning " %>
+				<% if current_chef.admin? && current_chef!=@chef %>
+					<%= link_to "Delete Profile", chef_path(@chef), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure you want to delete this recipe?"} %>
+				<% end %>
 			<% end %>
 			<%= link_to "Return to Chefs list", chefs_path, class: "btn btn-xs btn-primary" %>
 		</div>

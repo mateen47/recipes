@@ -9,30 +9,64 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#" style="color:#fff;" >Home <span class="sr-only">(current)</span></a>
+        <%= link_to "Chefs", chefs_path, class: "nav-link", style: "color:#fff;" %> 
+
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" style="color:#fff;">Link</a>
+        <%= link_to "All Recipes", recipes_path, class: "nav-link", style: "color:#fff;" %> 
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#fff;">
-          Recipes
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to "Create a new recipe", new_recipe_path, class: "dropdown-item" %>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" style="color:#fff;">Disabled</a>
-      </li>
+      <% leftpadding=0; %>
+      <% if logged_in? %>
+        <% leftpadding = 250; %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#fff;">
+            Recipes
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Create a new recipe", new_recipe_path, class: "dropdown-item" %>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+      <% else %>
+        <% leftpadding = 350; %>
+      <% end %>
+      
+      <form class="form-inline my-2 my-lg-0" style="padding-left: <%= leftpadding %>px;">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      
+      <% if logged_in? %>
+        <% chef = current_chef %>
+        <li class="nav-item " style="padding-left: 30px;">
+          <%= gravatar_for chef, size: 45  %>
+        </li>
+        
+        <li class="nav-item dropdown" >
+          
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#fff;">
+            Chef <%= chef.chefname %>
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "View Profile", chef_path(chef), class: "dropdown-item" %>
+            <%= link_to "Edit Profile", edit_chef_path(chef), class: "dropdown-item" %>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            
+            <%= link_to "Log out", logout_path, method: :delete, style: "color:#000;", class: "dropdown-item" %>
+          </div>
+        </li>
+      <% else %>
+
+        <li class="nav-item active" style="padding-left: 80px;">
+          <%= link_to "Log in", login_path, style: "color:#fff;", class: "nav-link" %>
+        </li>
+      <% end %>
+        <li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>
 <br>

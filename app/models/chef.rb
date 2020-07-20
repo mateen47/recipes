@@ -4,6 +4,8 @@ class Chef < ApplicationRecord
 	validates :email, presence: true, length: {maximum: 255},
 									  format: {with: VALID_EMAIL_REGEX }
 
-	has_many :recipes
+	has_many :recipes , dependent: :destroy
 	has_secure_password
+	validates :password, presence: true, length: {minimum: 5}, allow_nil: true
+	default_scope -> { order(updated_at: :desc)}
 end

@@ -1,1 +1,30 @@
-<%= render 'shared/page_title', title: "Your profile" %>
+<%= render 'shared/page_title', title: "Chef #{@chef.chefname}'s profile" %>
+
+<div class="row">
+	<div class="col-md-4 col-md-offset-4 center" style="padding-left: 500px;">
+		<%= gravatar_for @chef, size: 150 %>
+	</div>
+	<div class="col-md-8 well">
+		<br>
+	</div>
+	<div class="col-md-8 well" style=" padding-left: 400px;">
+		<div class="recipe-actions ">
+			<% if logged_in? && current_chef==@chef %>
+				<%= link_to "Edit Profile", edit_chef_path(@chef), class: "btn btn-xs btn-warning " %>
+			<% end %>
+			<%= link_to "Return to Chefs list", chefs_path, class: "btn btn-xs btn-primary" %>
+		</div>
+	</div>
+</div>
+<br>
+<hr />
+
+ <div class="digg_pagination" style="padding-left: 450px;">
+    <%= will_paginate @chef_recipes %>
+ </div>
+<%= render 'recipes/recipe', obj:@chef_recipes %>
+ <div class="digg_pagination" style="padding-left: 450px;">
+    <%= will_paginate @chef_recipes %>
+ </div>
+
+

@@ -1,24 +1,10 @@
 <%= render 'shared/page_title', title: "showing all recipes" %>
 
-<% @recipes.each do |recipe| %>
-	<div class="row">
-		<div class="col-md-2">
-			<section class="center chef_info">
-				<%= gravatar_for(recipe.chef, size: 120) %>
-			</section>
-		</div>
 
-		<div class="col-md-8 well bg">
-			<br>
-			<h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
-			<p><%= truncate(recipe.description, length: 150) %></p>
-			<p>
-				<span class="quiet"><small>Created  <%= time_ago_in_words(recipe.created_at) %>  ago</small></span>
-			</p>
-		</div>
-		<div class="col-md-8 well ">
-			<br>
-		</div>
-	</div>
-	
-<% end %>
+ <div class="digg_pagination" style="padding-left: 450px;">
+    <%= will_paginate %>
+ </div>
+<%= render 'recipe', obj:@recipes %>
+ <div class="digg_pagination" style="padding-left: 450px;">
+    <%= will_paginate %>
+ </div>

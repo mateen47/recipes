@@ -3,9 +3,10 @@ class Chef < ApplicationRecord
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: {maximum: 255},
 									  format: {with: VALID_EMAIL_REGEX }
+	validates_uniqueness_of :email
 
 	has_many :recipes , dependent: :destroy
 	has_secure_password
 	validates :password, presence: true, length: {minimum: 5}, allow_nil: true
-	default_scope -> { order(updated_at: :desc)}
+	has_many :comments, dependent: :destroy
 end

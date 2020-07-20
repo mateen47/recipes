@@ -21,7 +21,10 @@
 </div>
 <br>
 <hr />
-
+<% if @chef.recipes.count !=0 %>
+<div style="padding-left: 170px;">
+	<h1>Chef <%= @chef.chefname %>'s recipes </h1>
+</div>
  <div class="digg_pagination" style="padding-left: 450px;">
     <%= will_paginate @chef_recipes %>
  </div>
@@ -29,5 +32,12 @@
  <div class="digg_pagination" style="padding-left: 450px;">
     <%= will_paginate @chef_recipes %>
  </div>
+ <% else %>
+ <div >
+	<h1>No recipe </h1>
+</div>
+<br><br>
+<% end %>
+
 
 

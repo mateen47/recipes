@@ -17,7 +17,7 @@
       </li>
       <% leftpadding=0; %>
       <% if logged_in? %>
-        <% leftpadding = 250; %>
+        <% leftpadding = 150; %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#fff;">
             Recipes
@@ -30,9 +30,23 @@
           </div>
         </li>
       <% else %>
-        <% leftpadding = 350; %>
+        <% leftpadding = 250; %>
       <% end %>
-      
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#fff;">
+            Ingredients
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "View all Ingredients", ingredients_path, class: "dropdown-item" %>
+              <% Ingredient.all.each do |ingredient| %>
+                <%= link_to "#{ingredient.name}", ingredient_path(ingredient), class: "dropdown-item" %>
+            <% end %>
+            <% if logged_in? && current_chef.admin? %>
+              <div class="dropdown-divider"></div>
+                <%= link_to "new Ingredient", new_ingredient_path, class: "dropdown-item" %>
+              </div>
+            <% end %>
+        </li>
       <form class="form-inline my-2 my-lg-0" style="padding-left: <%= leftpadding %>px;">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

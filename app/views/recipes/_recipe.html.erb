@@ -11,8 +11,11 @@
 			<br>
 			<h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
 			<p><%= truncate(recipe.description, length: 150) %></p>
+			<% if recipe.ingredients.any? %>
+				<p>Ingredients: <%= render recipe.ingredients %></p>
+			<% end %>
 			<p>
-				<span class="quiet"><small>Created  <%= time_ago_in_words(recipe.created_at) %>  ago</small></span>
+				<span class="quiet"><small>Created  <%= time_ago_in_words(recipe.created_at) %>  ago by chef <%= recipe.chef.chefname.capitalize %></small></span>
 			</p>
 			<% if logged_in? && (current_chef==recipe.chef or current_chef.admin?) %>
 				<%= link_to "Edit this recipe", edit_recipe_path(recipe), class: "btn btn-xs btn-warning " %>
